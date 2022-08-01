@@ -1,0 +1,10 @@
+# Pytest cache
+.pytest_cache
+__pycache__
+
+# VSCode
+.vscode
+
+# Python dev stuff
+.python-version
+.coverage

@@ -1,0 +1,37 @@
+[tool.poetry]
+name = "unittest-parametrize"
+version = "0.1.0"
+description = "Test parametrization for unittest inspired by pytest"
+authors = ["Vlad Nedelcu <nedelcuvd@gmail.com>"]
+license = "MIT"
+packages = [
+    { include = "unittest_param", from = "src"}
+]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+
+[tool.poetry.dev-dependencies]
+pytest = "^7.1.2"
+pytest-cov = "^3.0.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.pytest.ini_options]
+console_output_style = "count"
+log_cli = 1
+log_cli_level = "INFO"
+log_level = "INFO"
+# from https://github.com/pytest-dev/pytest/blob/master/src/_pytest/logging.py
+log_format = "%(levelname)-8s | %(name)s:%(lineno)d | %(message)s"
+testpaths = [
+    "tests"
+ ]
+ addopts = """
+    -v
+    --cov-report=term-missing
+    --cov=src
+    --no-cov-on-fail
+"""
