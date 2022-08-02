@@ -5,11 +5,7 @@ import unittest
 from . import exceptions
 
 
-Params = typing.Iterable[typing.Dict[str, typing.Any]]
-Keys = typing.Iterable[str]
-
-
-def parametrize(test_cases: Params, test_cases_names: Keys):
+def parametrize(test_cases: typing.Iterable[typing.Dict[str, typing.Any]], test_cases_names: typing.Iterable[str]):
     """Test parametrization inspired from `pytest`.
 
     Provide test cases values and test cases names to both parameters and using
@@ -23,10 +19,13 @@ def parametrize(test_cases: Params, test_cases_names: Keys):
 
         @functools.wraps(f)
         def wrapper(self: unittest.TestCase):
-            if isinstance(test_cases, typing.Iterable) and not len(test_cases) > 0:
+            no_test_cases = len(list(test_cases))
+            no_test_cases_names = len(list(test_cases_names))
+
+            if isinstance(test_cases, typing.Iterable) and not no_test_cases > 0:
                 raise exceptions.NoValuesProvided
 
-            if len(test_cases_names) != len(test_cases):
+            if no_test_cases_names != no_test_cases:
                 raise exceptions.TestCasesNamesInconsistency
 
             try:

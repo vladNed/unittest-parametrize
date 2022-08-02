@@ -8,10 +8,10 @@ class BaseException(Exception):
         if msg:
             self.message = msg
         if not self.message:
-            self.message = self.__class__.__name__
+            self.message = self.__class__.__name__  # pragma: no cover
 
     def __str__(self) -> str:
-        return self.message
+        return self.message  # pragma: no cover
 
 
 class NoValuesProvided(BaseException):

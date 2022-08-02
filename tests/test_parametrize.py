@@ -71,3 +71,21 @@ def test_incorrect_arguments_given():
     a = TestMock()
     with pytest.raises(exceptions.TestCaseHasIncompatibleArgs):
         a.test_case()
+
+
+def test_cases_as_tuple_not_list():
+    TEST_CASES = (
+        dict(arg1=1, arg2=1, expected=2),
+        dict(arg1=12, arg2=2, expected=14)
+    )
+
+    TES_CASES_NAMES = ("test_one", "test_two")
+
+    class TestMock(TestCase):
+
+        @parametrize(TEST_CASES, TES_CASES_NAMES)
+        def test_case(self, arg1, arg2, expected):
+            assert arg1 + arg2 == expected
+
+    a = TestMock()
+    a.test_case()
