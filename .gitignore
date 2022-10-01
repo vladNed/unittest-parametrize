@@ -8,3 +8,6 @@ __pycache__
 # Python dev stuff
 .python-version
 .coverage
+
+# MYPY
+.mypy_cache

@@ -1,11 +1,14 @@
-import typing
 import functools
+import typing
 import unittest
 
 from . import exceptions
 
 
-def parametrize(test_cases: typing.Iterable[typing.Dict[str, typing.Any]], test_cases_names: typing.Iterable[str]):
+def parametrize(
+    test_cases: typing.Iterable[typing.Dict[str, typing.Any]],
+    test_cases_names: typing.Iterable[str],
+):
     """Test parametrization inspired from `pytest`.
 
     Provide test cases values and test cases names to both parameters and using
@@ -16,7 +19,6 @@ def parametrize(test_cases: typing.Iterable[typing.Dict[str, typing.Any]], test_
     """
 
     def decorator(f: typing.Callable):
-
         @functools.wraps(f)
         def wrapper(self: unittest.TestCase):
             no_test_cases = len(list(test_cases))
@@ -36,4 +38,5 @@ def parametrize(test_cases: typing.Iterable[typing.Dict[str, typing.Any]], test_
                 raise exceptions.TestCaseHasIncompatibleArgs(str(ex))
 
         return wrapper
+
     return decorator
